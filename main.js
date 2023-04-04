@@ -33,4 +33,5 @@ const client = new Discord.Client({
     }
 });
 
+if (!process.env.DiscordToken) return console.warn(colors.yellow('You must provide a discord bot token before to use this command!'));
 client.login(process.env.DiscordToken);
