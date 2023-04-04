@@ -1,12 +1,12 @@
 {
   "name": "foxzilla-bot",
   "version": "1.0.0b",
-  "main": "main.js",
+  "main": "start.js",
   "repository": "https://github.com/GuikiPT/FoXZilla-Bot.git",
-  "author": "GuikiPT <72317733+GuikiPT@users.noreply.github.com>",
+  "author": "GuikiPT",
   "license": "MIT",
   "scripts": {
-    "start": "node main.js"
+    "start": "node start.js"
   },
   "dependencies": {
     "better-logging": "^5.0.0",
