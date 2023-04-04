@@ -4,7 +4,7 @@ const moment = require('moment');
 const colors = require('colors/safe');
 const fs = require('fs');
 require('better-logging')(console, {
-    format: ctx => `\n${colors.grey('[' + moment().format('LT') + ']')} ${colors.grey('[' + moment().format('L') + ']')} ${ctx.type} >> ${ctx.msg}`,
+    format: ctx => `${colors.grey('[' + moment().format('LT') + ']')} ${colors.grey('[' + moment().format('L') + ']')} ${ctx.type} >> ${ctx.msg}`,
     saveToFile: `${__dirname}/logs/${moment().format('YYYY')}/${moment().format('MM')}/${moment().format('DD')}.log`,
     color: {
         base: colors.grey,
