@@ -23,8 +23,10 @@ const client = new Discord.Client({
         Discord.GatewayIntentBits.Guilds,
     ],
 });
+client.slashCommands = new Discord.Collection();
 
-['events'].forEach(handler => {
+
+['events', 'slashs'].forEach(handler => {
     try {
         require(__dirname + '/handlers/' + handler)(client);
     }
