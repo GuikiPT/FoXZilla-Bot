@@ -3,6 +3,8 @@ require('dotenv').config();
 const moment = require('moment');
 const colors = require('colors/safe');
 const fs = require('fs');
+const loadingCli = require('loading-cli');
+const cliSpinners = require('cli-spinners');
 require('better-logging')(console, {
     format: ctx => `${colors.grey('[' + moment().format('LT') + ']')} ${colors.grey('[' + moment().format('L') + ']')} ${ctx.type} >> ${ctx.msg}`,
     saveToFile: `${__dirname}/logs/${moment().format('YYYY')}/${moment().format('MM')}/${moment().format('DD')}.log`,
@@ -18,6 +20,15 @@ require('better-logging')(console, {
     },
 });
 
+
+const clientLoadProgress = loadingCli({
+    "text": colors.yellow(" Starting the Bot . . ."),
+    "color": "yellow",
+    "interval": 100,
+    "stream": process.stdout,
+    "frames": cliSpinners.aesthetic.frames
+}).start();
+
 const client = new Discord.Client({
     intents: [
         Discord.GatewayIntentBits.Guilds,
@@ -26,10 +37,10 @@ const client = new Discord.Client({
 
 ['events'].forEach(handler => {
     try {
-        require(__dirname + '/handlers/' + handler)(client);
+        require(__dirname + '/handlers/' + handler)(client, clientLoadProgress);
     }
     catch (error) {
-        console.error(colors.red(error.stack || error));
+        console.error('\n' + colors.red(error.stack || error));
     }
 });
 

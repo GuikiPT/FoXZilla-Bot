@@ -1,7 +1,7 @@
 const fs = require('fs');
 const colors = require('colors/safe');
 
-module.exports = async function (client) {
+module.exports = async function (client, clientLoadProgress) {
     try{
         const eventFolders = fs.readdirSync(__dirname +  '/../events');
 
@@ -10,9 +10,9 @@ module.exports = async function (client) {
             for (const file of eventFiles) {
                 const event = require(__dirname +  `/../events/${folder}/${file}`);
                 if (event.once) {
-                    client.once(event.name, (...args) => event.execute(client, ...args));
+                    client.once(event.name, (...args) => event.execute(client, clientLoadProgress, ...args));
                 } else {
-                    client.on(event.name, (...args) => event.execute(client, ...args));
+                    client.on(event.name, (...args) => event.execute(client, clientLoadProgress, ...args));
                 }
             }
         }
