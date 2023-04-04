@@ -33,8 +33,4 @@ const client = new Discord.Client({
     }
 });
 
-client.once(Discord.Events.ClientReady, async (c) => {
-    console.log('Ready as ' + c.user.tag);
-});
-
 client.login(process.env.DiscordToken);
